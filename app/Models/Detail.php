@@ -5,22 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Cart extends Model
+class Detail extends Model
 {
 	use SoftDeletes;
 
 	protected $fillable = [
-		'total_price'
+		'amount'
 	];
 
-	public function user()
+	public function cart()
 	{
-			return $this->belongsTo(User::class);
+			return $this->belongsTo(Cart::class);
 	}
 
-	public function detail()
+	public function product()
 	{
-			return $this->hasMany(Detail::class);
+			return $this->belongsTo(Product::class);
 	}
-
 }

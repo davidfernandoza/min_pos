@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+		use Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'names', 'last_names', 'email', 'password', 'rol'
     ];
 
     /**
@@ -25,15 +26,27 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
-    ];
+        'password'
+		];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+
+		public function setPasswordAttribute($value)
+		{
+			$this->attributes['password'] = bcrypt($value);
+		}
+
+		public function cart()
+		{
+				return $this->hasMany(Cart::class);
+		}
+
+		public function comment()
+		{
+				return $this->hasMany(Comment::class);
+		}
+
+		public function image()
+		{
+				return $this->morphOne(Image::class, 'imageable');
+		}
 }
