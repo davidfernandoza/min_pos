@@ -10904,3 +10904,12 @@ a.text-dark:focus {
   }
 }
 
+.login-footer-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-footer-container .btn {
+  width: 49%;
+}
+
