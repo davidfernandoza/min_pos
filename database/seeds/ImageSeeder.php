@@ -20,6 +20,6 @@ class ImageSeeder extends Seeder
 				'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
 			]);
 
-			factory(App\Models\Image::class, 10)->create();
+			factory(App\Models\Image::class, 80)->create();
     }
 }

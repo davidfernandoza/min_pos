@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-	<category/>
+	<product :products="{{$products}}"/>
 @endsection

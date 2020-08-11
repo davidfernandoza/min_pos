@@ -19,7 +19,7 @@ class CategorySeeder extends Seeder
 			]);
 
 			DB::table('categories')->insert([
-				'name' => 'Informatica',
+				'name' => 'Informática',
 				'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
 				'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
 			]);

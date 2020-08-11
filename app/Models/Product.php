@@ -10,7 +10,7 @@ class Product extends Model
 	use SoftDeletes;
 
 	protected $fillable = [
-		'price', 'amount', 'description'
+		'name','price', 'amount', 'description'
 	];
 
 	public function category()
@@ -18,12 +18,12 @@ class Product extends Model
 			return $this->belongsTo(Category::class);
 	}
 
-	public function comment()
+	public function comments()
 	{
 			return $this->hasMany(Comment::class);
 	}
 
-	public function detail()
+	public function details()
 	{
 			return $this->hasMany(Detail::class);
 	}

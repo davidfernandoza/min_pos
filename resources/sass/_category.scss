@@ -1,0 +1,17 @@
+.category-card, .product
+{
+	cursor: pointer;
+	a{
+		text-decoration: none;
+		color: black;
+	}
+}
+
+.product
+{
+	a{
+		.card-body{
+			height: 120px;
+		}
+	}
+}

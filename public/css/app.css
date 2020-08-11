@@ -10913,3 +10913,18 @@ a.text-dark:focus {
   width: 49%;
 }
 
+.category-card,
+.product {
+  cursor: pointer;
+}
+
+.category-card a,
+.product a {
+  text-decoration: none;
+  color: black;
+}
+
+.product a .card-body {
+  height: 120px;
+}
+
