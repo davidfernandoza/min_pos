@@ -3,16 +3,8 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div v-for="(category, index1) in categories" :key="index1">
-					<div class="card category-card w-100" >
-						<a :href="`/products/${category.id}`">
-							<div class="card-body">
-								<h2 class="text-center">
-									{{category.name}}
-								</h2>
-							</div>
-						</a>
-					</div>
-					<div  class="d-flex flex-wrap justify-content-md-between justify-content-sm-start">
+					<category :category="category"/>
+					<div  class="d-flex flex-wrap justify-content-md-between">
 						<product :product="product" v-for="(product, index2) in category.products" :key="index2"/>
 					</div>
 				</div>
@@ -22,15 +14,16 @@
 </template>
 
 <script>
-	import Product from './ProductComponent.vue'
+	import Product from '../product/ProductComponent.vue'
+	import Category from './CategoryComponent.vue'
 	export default {
 		components:{
-			Product
+			Product,
+			Category
 		},
 		data(){
 			return {
-				categories: [],
-				products: {}
+				categories: []
 			}
 		},
 		created(){
@@ -39,7 +32,6 @@
 		methods:{
 			getCategories(){
 				axios.get('/api/categories/get').then(response => {
-					console.log(response.data);
 					this.categories = response.data
 				})
 			}

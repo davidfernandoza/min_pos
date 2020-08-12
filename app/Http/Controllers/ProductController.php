@@ -10,9 +10,8 @@ class ProductController extends Controller
 {
 	public function getAllByCategory(Category $Category)
 	{
-		$products = $Category->with('products.image')->get();
-// plurar
-		return view('product', compact('products'));
+	 $products =	$Category->with('products.image')->find($Category);
+		return view('product', ['category' => $products[0]]);
 	}
 
 }

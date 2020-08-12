@@ -20,9 +20,6 @@
 			return {
 				data_product: this.product
 			}
-		},
-		created(){
-			// console.log(this.product);
 		}
 	}
 </script>
