@@ -12,6 +12,10 @@ class UserController extends Controller
 
 	 public function store(UserRequest $request)
 	 {
+
+		// $this->user->user_personal_information()
+		// 				->save(new UserPersonalInformation($request->all()));
+
 			$user = new User($request->all());
 			$user->save();
 

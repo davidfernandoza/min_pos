@@ -16,7 +16,7 @@ class CreateCartsTable extends Migration
         Schema::create('carts', function (Blueprint $table) {
 						$table->bigIncrements('id')->unsigned();
 						$table->unsignedBigInteger('user_id');
-						$table->double('total_price', 11, 5)->default(0);
+						$table->double('total_price', 11, 2)->default(0);
 						$table->timestamps();
 						$table->softDeletes();
 

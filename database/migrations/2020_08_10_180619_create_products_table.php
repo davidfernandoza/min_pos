@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
 						$table->unsignedBigInteger('category_id');
 						$table->string('name');
 						$table->integer('amount');
-						$table->double('price', 11, 5);
+						$table->double('price', 11, 2);
 						$table->text('description');
 						$table->timestamps();
 						$table->softDeletes();

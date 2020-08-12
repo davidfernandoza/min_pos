@@ -9,11 +9,13 @@ require('./bootstrap')
 import Vue from 'vue'
 import CategoryList from './components/category/CategoryListComponent.vue'
 import ProductList from './components/product/ProductListComponent.vue'
+import ProductInfo from './components/product/ProductInfoComponent.vue'
 
 new Vue({
 	el: '#app',
 	components:{
 		CategoryList,
-		ProductList
+		ProductList,
+		ProductInfo
 	}
 });
