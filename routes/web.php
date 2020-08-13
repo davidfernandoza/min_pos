@@ -7,6 +7,7 @@ Route::post('/user/login', 'AuthController@login')->name('user.login');
 Route::post('/user/register', 'UserController@store')->name('user.register');
 Route::get('/products/{product?}', 'ProductController@get');
 Route::get('/products/category/{category}', 'ProductController@getAllByCategory');
+Route::post('/products/search/', 'ProductController@getAllBySearch')->name('search');
 
 Route::group(['middleware'=>'auth'], function(){
 	Route::post('/logout', 'AuthController@logout')->name('logout');

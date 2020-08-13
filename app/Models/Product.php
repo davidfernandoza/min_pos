@@ -32,4 +32,16 @@ class Product extends Model
 	{
 			return $this->morphOne(Image::class, 'imageable');
 	}
+
+	// Scopes
+
+	public function scopeName($query, $name)
+	{
+		if ($name) return $query->orWhere('name', 'LIKE', '%'.$name.'%');
+	}
+
+	public function scopeDescription($query, $description)
+	{
+		if ($description) return $query->orWhere('description', 'LIKE', '%'.$description.'%');
+	}
 }

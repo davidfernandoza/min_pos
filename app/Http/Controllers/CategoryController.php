@@ -9,6 +9,9 @@ class CategoryController extends Controller
 {
    public function getAll()
 	 {
-		 return response()->json(Category::has('products')->with('products.image')->take(10)->get());
+		 return response()->json(Category::has('products')->with(['products' => function ($query)
+		 {
+			 return $query->take(10)->with('image');
+		 }])->get());
 	 }
 }

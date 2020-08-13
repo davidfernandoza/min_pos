@@ -24,11 +24,19 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
+					'photo' => 'image',
 					'names' => 'required|string|min:3|max:100',
 					'last_names' => 'required|string|min:3|max:100',
 					'password' => 'required|string|min:8|max:100|confirmed',
 					'email' => 'required|email|min:6|max:100|unique:users',
 					'rol' => 'string|in:ADMIN,USER'
         ];
-    }
+		}
+
+		// public function messages()
+		// {
+		// 	return [
+		// 		'photo.image' => '¡El avatar del usuario debe de ser una imagen valida!'
+		// 	];
+		// }
 }

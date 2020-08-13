@@ -12,7 +12,7 @@
 			<div class="row no-gutters ">
 				<div class="col-4 col-md-3 col-lg-2 d-flex pl-2 flex-wrap align-items-center ">
 					<img :src="comment.user.image.url"  width="100" v-if="comment.user.image">
-					<img src="https://lorempixel.com/200/200/?24345"  width="100" v-else>
+					<img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"  width="100" v-else>
 				</div>
 				<div class="col-8 col-md-9 col-lg-10">
 					<div class="card-body">
@@ -55,10 +55,10 @@
 					window.location.href = "/login";
 				}
 				else{
+					console.log(this.comment);
 					axios.post(`/comments/store/${this.auth_id}`, this.comment).then(response => {
-						console.log(response.data);
-						this.comments.push(response.data.comment)
-						this.comment = {}
+						this.comments.unshift(response.data.comment)
+						this.comment.body = ''
 					})
 				}
 			}

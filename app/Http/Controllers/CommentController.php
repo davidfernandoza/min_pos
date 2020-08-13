@@ -12,13 +12,16 @@ class CommentController extends Controller
 {
 	public function getAllByProduct(Product $product)
 	{
-		return response()->json($product::with('comments.user.image')->find($product->id));
+		return response()->json($product::with(['comments' => function ($query){
+			return $query->orderBy('id', 'desc')->with('user.image');
+		}])->find($product->id));
 	}
+
 
 	public function store(User $user, CommentRequest $request)
 	{
 		// TODO: como retornar un objeto con todos los campos?
 		$comment = $user->comments()->save(new Comment($request->all()));
-		return response()->json(['comment' => $comment]);
+		return response()->json(['comment' => $comment->load('user.image')]);
 	}
 }

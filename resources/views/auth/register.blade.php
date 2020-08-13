@@ -4,13 +4,23 @@
 <div class="container">
 	<div class="row">
 		<div class="card col-md-6 col-sm-8 m-auto">
-			<form action="{{route('user.register')}}" method="POST">
+			<form action="{{route('user.register')}}" method="POST" enctype="multipart/form-data">
 				@csrf
 				<div class="card-header">
 					<h1>Register</h1>
 				</div>
 
 				<div class="card-body">
+					<div class="form-group">
+						<div class="custom-file">
+							<input type="file" class="custom-file-input @error('photo') is-invalid @enderror" id="customFile" name="photo">
+							@error('photo')
+							<span class="invalid-feedback">{{ $message }}</span>
+							@enderror
+							<label class="custom-file-label text-mute" for="customFile">Choose Photo</label>
+						</div>
+					</div>
+
 					<div class="form-group">
 						<input type="text"
 						class="form-control @error('names') is-invalid @enderror" name="names" placeholder="Names" value="{{ old('names') }}" required>
@@ -52,6 +62,7 @@
 
 			</div>
 		</form>
+
 	</div>
 </div>
 @endsection
