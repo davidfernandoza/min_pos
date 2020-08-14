@@ -1,20 +1,32 @@
 <?php
 
 Route::view('/', 'home')->name('home');
-Route::view('/login', 'auth.login')->name('login');
-Route::view('/register', 'auth.register')->name('register');
-Route::post('/user/login', 'AuthController@login')->name('user.login');
-Route::post('/user/register', 'UserController@store')->name('user.register');
-Route::get('/products/{product?}', 'ProductController@get');
-Route::get('/products/category/{category}', 'ProductController@getAllByCategory');
-Route::post('/products/search/', 'ProductController@getAllBySearch')->name('search');
+
+Route::group(['prefix' => 'auth'], function () {
+	Route::view('/login', 'auth.login')->name('login');
+	Route::view('/register', 'auth.register')->name('register');
+	Route::post('/login', 'AuthController@login')->name('auth.login');
+	Route::post('/register', 'UserController@store')->name('auth.register');
+});
+
+Route::group(['prefix' => 'products'], function () {
+	Route::get('/search/', 'ProductController@search')->name('search');
+	Route::get('/{product?}', 'ProductController@get');
+});
+
+Route::group(['prefix' => 'category'], function () {
+	Route::get('/{category}', 'CategoryController@get');
+});
+
 
 Route::group(['middleware'=>'auth'], function(){
-	Route::post('/logout', 'AuthController@logout')->name('logout');
+	Route::post('/auth/logout', 'AuthController@logout')->name('logout');
 	Route::post('/comments/store/{user}', 'CommentController@store');
 
-	Route::group(['middleware'=>'admin'], function(){
+	Route::group(['prefix' => 'admin'], function(){
 		Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
-
+		Route::get('/categories', 'CategoryController@getAll')->name('categories');
+		Route::get('/products', 'ProductController@getAll')->name('products');
+		Route::get('/users', 'UserController@getAll')->name('users');
 	});
 });

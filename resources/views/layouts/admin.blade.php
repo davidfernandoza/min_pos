@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{{-- <meta name="viewport" content="width=device-width, initial-scale=1"> --}}
 
 	<!-- CSRF Token -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
@@ -23,7 +23,8 @@
 </head>
 <body>
 	<div id="app">
-		<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+
+		<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
 			<div class="container">
 				<a class="navbar-brand" href="{{ url('/') }}">
 					{{ config('app.name', 'Laravel') }}
@@ -36,24 +37,6 @@
 					<!-- Left Side Of Navbar -->
 					<ul class="navbar-nav mr-auto w-100">
 
-						@if (Request::is('auth/*') != 1)
-					<form action="{{route('search')}}" class="d-flex justify-content-center w-100" method="GET">
-
-								<div class="input-group w-75">
-									<input type="text" class="form-control" placeholder="Search" name="search">
-									<div class="input-group-append w-25">
-										<button class="btn btn-outline-secondary w-100">
-
-											<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-												<path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
-												<path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-											</svg>
-
-										</button>
-									</div>
-								</div>
-							</form>
-						@endif
 					</ul>
 
 					<!-- Right Side Of Navbar -->
@@ -78,7 +61,7 @@
 								@if (Auth::user()->rol == 'ADMIN')
 								<a class="dropdown-item" href="{{route('dashboard')}}">
 									Dashboard
-									</a>
+								</a>
 								@endif
 
 								<a class="dropdown-item" href="{{ route('logout') }}"
@@ -96,11 +79,26 @@
 				</ul>
 			</div>
 		</div>
-	</nav>
+		</nav>
 
-	<main class="py-4 main overflow-hidden ">
-		@yield('content')
+
+
+	<main class="overflow-hidden container-main">
+		<div class="row">
+			<div class="col-md-3 sidebar" >
+				<ul class="list-group list-group-flush ul-container">
+					<a href="{{route('dashboard')}}" class="list-group-item">Dashboard</a>
+					<a href="{{route('categories')}}" class="list-group-item">Categories</a>
+					<a href="{{route('products')}}" class="list-group-item">Products</a>
+					<a href="{{route('users')}}" class="list-group-item">Users</a>
+				</ul>
+			</div>
+			<div class="col-md-8 m-2">
+					@yield('content')
+			</div>
+		</div>
 	</main>
+
 </div>
 </body>
 </html>

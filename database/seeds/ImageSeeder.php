@@ -13,7 +13,7 @@ class ImageSeeder extends Seeder
     public function run(Faker $faker)
     {
 			DB::table('images')->insert([
-				'url' => $faker->imageUrl($width = 200, $height = 200),
+				'url' => 'images/default.png',
 				'imageable_type' => 'App\Models\User',
 				'imageable_id' => 1,
 				'created_at' => \Carbon\Carbon::now()->toDateTimeString(),

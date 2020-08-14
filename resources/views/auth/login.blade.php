@@ -4,13 +4,12 @@
 <div class="container">
 	<div class="row">
 		<div class="card col-md-6 col-sm-8 m-auto">
-			<form action="{{route('user.login')}}" method="POST">
+			<form action="{{route('auth.login')}}" method="POST">
 				@csrf
 				<div class="card-header">
 					<h1>Login</h1>
 				</div>
 
-				{{-- {{dd($errors)}} --}}
 
 				<div class="card-body">
 					<div class="form-group">

@@ -11,8 +11,7 @@
 		<div class="card mb-3" v-for="(comment, index) in comments" :key="index">
 			<div class="row no-gutters ">
 				<div class="col-4 col-md-3 col-lg-2 d-flex pl-2 flex-wrap align-items-center ">
-					<img :src="comment.user.image.url"  width="100" v-if="comment.user.image">
-					<img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"  width="100" v-else>
+					<img :src="`/${comment.user.image.url}`"  width="100">
 				</div>
 				<div class="col-8 col-md-9 col-lg-10">
 					<div class="card-body">
@@ -43,21 +42,18 @@
 		},
 		methods:{
 			getComments(){
-				axios.get(`/api/comments/get/${this.product_id}`).then(response => {
-					console.log(response.data.comments);
-					this.comments = response.data.comments
+				axios.get(`/api/comments/product/${this.product_id}`).then(response => {
+					this.comments = response.data
 				})
 			},
 			store(){
-				console.log(this.auth_id);
 				if (Object.keys(this.auth_id).length === 0) {
 					alert('Login first!!')
-					window.location.href = "/login";
+					window.location.href = "/auth/login";
 				}
 				else{
-					console.log(this.comment);
 					axios.post(`/comments/store/${this.auth_id}`, this.comment).then(response => {
-						this.comments.unshift(response.data.comment)
+						this.comments.unshift(response.data)
 						this.comment.body = ''
 					})
 				}

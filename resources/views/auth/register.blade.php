@@ -4,7 +4,7 @@
 <div class="container">
 	<div class="row">
 		<div class="card col-md-6 col-sm-8 m-auto">
-			<form action="{{route('user.register')}}" method="POST" enctype="multipart/form-data">
+			<form action="{{route('auth.register')}}" method="POST" enctype="multipart/form-data">
 				@csrf
 				<div class="card-header">
 					<h1>Register</h1>

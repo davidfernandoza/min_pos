@@ -16,12 +16,12 @@ class AuthController extends Controller
 
 			if (Auth::attempt($credentials)) {
 				if(Auth::user()->rol == 'ADMIN'){
-					return redirect('/dashboard');
+					return redirect()->route('dashboard');
 				}
 				return redirect('/');
 			}
 			return redirect()
-			->intended('/login')
+			->intended('/auth/login')
 			->withErrors(['credentials' => [trans('auth.failed')]])->withInput();
 	 }
 

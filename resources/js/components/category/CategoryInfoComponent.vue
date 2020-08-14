@@ -14,8 +14,8 @@
 </template>
 
 <script>
-	import Product from './ProductComponent.vue'
-	import Category from '../category/CategoryComponent.vue'
+	import Product from '../product/ProductComponent.vue'
+	import Category from './CategoryComponent.vue'
 	export default {
 		props: ['category'],
 		components:{
