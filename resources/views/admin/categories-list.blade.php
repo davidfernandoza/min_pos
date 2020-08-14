@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 
 @section('content')
-	<admin-body/>
+<admin-body :data="{{$categories}}" view_type="categories"/>
 @endsection

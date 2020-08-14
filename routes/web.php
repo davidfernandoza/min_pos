@@ -1,6 +1,7 @@
 <?php
 
 Route::view('/', 'home')->name('home');
+Route::get('/comments/product/{idProduct}', 'CommentController@getAllByProduct');
 
 Route::group(['prefix' => 'auth'], function () {
 	Route::view('/login', 'auth.login')->name('login');
@@ -14,19 +15,41 @@ Route::group(['prefix' => 'products'], function () {
 	Route::get('/{product?}', 'ProductController@get');
 });
 
-Route::group(['prefix' => 'category'], function () {
+Route::group(['prefix' => 'categories'], function () {
+	Route::get('/', 'CategoryController@getAll');
 	Route::get('/{category}', 'CategoryController@get');
 });
 
 
+// Auth
 Route::group(['middleware'=>'auth'], function(){
 	Route::post('/auth/logout', 'AuthController@logout')->name('logout');
 	Route::post('/comments/store/{user}', 'CommentController@store');
 
+	// Admin
 	Route::group(['prefix' => 'admin'], function(){
 		Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
 		Route::get('/categories', 'CategoryController@getAll')->name('categories');
-		Route::get('/products', 'ProductController@getAll')->name('products');
-		Route::get('/users', 'UserController@getAll')->name('users');
+
+		// Product
+		Route::group(['prefix' => 'products'], function(){
+			Route::get('/', 'ProductController@getAll')->name('products');
+			Route::post('/store', 'ProductController@store');
+			Route::post('/delete/{product}', 'ProductController@delete');
+		});
+
+		// Category
+		Route::group(['prefix' => 'categories'], function(){
+			Route::get('/', 'CategoryController@getAll')->name('categories');
+			Route::post('/store', 'CategoryController@store');
+			Route::post('/delete/{category}', 'CategoryController@delete');
+		});
+
+		// User
+		Route::group(['prefix' => 'users'], function(){
+			Route::get('/', 'UserController@getAll')->name('users');
+			Route::post('/store', 'UserController@store');
+			Route::post('/delete/{user}', 'UserController@delete');
+		});
 	});
 });

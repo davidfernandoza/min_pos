@@ -18,12 +18,18 @@ class CategoryController extends Controller
 
 		if($request->ajax()){
 			$categories = Category::with(['products' => function ($query){
-				return $query->take(10)->with('image');
+				return $query->take(40)->with('image');
 			}])->has('products')->get();
 
 			return response()->json($categories);
 		}
 
 		return view('admin.categories-list', ['categories' => Category::get()]);
+	}
+
+	public function delete(Category $category)
+	{
+		$category->delete();
+		return response()->json(['deleted' => 'OK']);
 	}
 }

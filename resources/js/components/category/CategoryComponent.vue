@@ -1,6 +1,6 @@
 <template>
 	<div class="card category-card w-100" >
-		<a :href="`/category/${category.id}`">
+		<a :href="`/categories/${category.id}`">
 			<div class="card-body">
 				<h2 class="text-center">
 					{{category.name}}

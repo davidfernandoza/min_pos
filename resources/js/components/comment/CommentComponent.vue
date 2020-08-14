@@ -42,7 +42,7 @@
 		},
 		methods:{
 			getComments(){
-				axios.get(`/api/comments/product/${this.product_id}`).then(response => {
+				axios.get(`/comments/product/${this.product_id}`).then(response => {
 					this.comments = response.data
 				})
 			},

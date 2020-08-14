@@ -29,12 +29,14 @@ class User extends Authenticatable
         'password'
 		];
 
-
+	// Accessors and Mutators
 		public function setPasswordAttribute($value)
 		{
 			$this->attributes['password'] = bcrypt($value);
 		}
 
+
+	// Relations
 		public function carts()
 		{
 				return $this->hasMany(Cart::class);

@@ -21,7 +21,9 @@
 							<span class="my-2 text-muted">( {{product.amount}} available )</span>
 						</div>
 					</div>
-					<button class="btn btn-primary btn-block">Add cart</button>
+					<button class="btn btn-primary btn-block">
+						Add cart <i class="fas fa-cart-plus"></i>
+					</button>
 				</form>
 				<h2 class="h4 my-4">Description</h2>
 				<p>{{product.description}}</p>

@@ -31,7 +31,7 @@
 		},
 		methods:{
 			getCategories(){
-				axios.get('/api/categories/get').then(response => {
+				axios.get('/categories').then(response => {
 					this.categories = response.data
 				})
 			}

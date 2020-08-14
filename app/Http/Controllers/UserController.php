@@ -14,7 +14,7 @@ class UserController extends Controller
 
 	public function getAll()
 	{
-		return view('admin.users-list', ['users' => User::all()]);
+		return view('admin.users-list', ['users' => User::with('image')->get()]);
 	}
 
 	 public function store(UserRequest $request)
@@ -43,4 +43,13 @@ class UserController extends Controller
 			Auth::login($user);
 			return redirect('/');
 	 }
+
+	public function delete(User $user)
+	{
+		if(Auth::user() != $user){
+			$user->delete();
+			return response()->json(['deleted' => 'Ok']);
+		}
+		return response()->json(['deleted' => 'Forbidden'], 403);
+	}
 }

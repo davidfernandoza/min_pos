@@ -11,7 +11,7 @@ class ProductController extends Controller
 
 	public function get($id = NULL)
 	{
-		$product =	Product::with('image', 'category')->find($id);
+		$product =	Product::has('category')->with('image', 'category')->find($id);
 		if (!$product) {
 			$product = new Product();
 		}
@@ -20,7 +20,7 @@ class ProductController extends Controller
 
 	public function getAll(Request $request)
 	{
-		$products =	Product::with('image', 'category')->get();
+		$products =	Product::has('category')->with('image', 'category')->get();
 		return view('admin.products-list', compact('products'));
 	}
 
@@ -30,7 +30,7 @@ class ProductController extends Controller
 			'search' => ['required'],
 		]);
 
-		$products =	Product::with('category', 'image')
+		$products =	Product::has('category')->with('category', 'image')
 		->name($request->search)
 		->description($request->search)
 		->get();
@@ -38,4 +38,9 @@ class ProductController extends Controller
 		return view('product-search', compact('products'));
 	}
 
+	public function delete(Product $product)
+	{
+		$product->delete();
+		return response()->json(['deleted' => 'OK']);
+	}
 }

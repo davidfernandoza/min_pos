@@ -22,11 +22,7 @@
 </template>
 
 <script>
-import ProductList from './ProductListComponent.vue'
 	export default {
-		components:{
-			ProductList
-		}
 	}
 </script>
 

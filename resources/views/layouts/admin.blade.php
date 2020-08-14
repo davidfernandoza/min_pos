@@ -13,6 +13,7 @@
 	<script src="{{ mix('js/app.js') }}" defer></script>
 	<script src="{{ asset('js/jquery.min.js') }}"></script>
 	<script src="{{ asset('js/image.js') }}"></script>
+	<script src="https://kit.fontawesome.com/1cb03eac5e.js" crossorigin="anonymous"></script>
 
 	<!-- Fonts -->
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -28,6 +29,7 @@
 			<div class="container">
 				<a class="navbar-brand" href="{{ url('/') }}">
 					{{ config('app.name', 'Laravel') }}
+					<i class="far fa-money-bill-alt"></i>
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
 					<span class="navbar-toggler-icon"></span>
@@ -87,7 +89,8 @@
 		<div class="row">
 			<div class="col-md-3 sidebar" >
 				<ul class="list-group list-group-flush ul-container">
-					<a href="{{route('dashboard')}}" class="list-group-item">Dashboard</a>
+					<a href="{{route('dashboard')}}" class="list-group-item">Dashboard
+					</a>
 					<a href="{{route('categories')}}" class="list-group-item">Categories</a>
 					<a href="{{route('products')}}" class="list-group-item">Products</a>
 					<a href="{{route('users')}}" class="list-group-item">Users</a>
