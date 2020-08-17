@@ -19,7 +19,7 @@ class UserController extends Controller
 
 	public function store(UserRequest $request, User $user)
 	{
-		//IMG
+		//Img
 		if($request->file('photo')){
 			$path = Storage::disk('public')->put('images', $request->file('photo'));
 		}
@@ -34,9 +34,11 @@ class UserController extends Controller
 				$user->image()->update($image->toArray());
 			}
 		}
+
+		// Create
 		else{
-			// Create
 			$user = new User($request->all());
+			$user->password = $request->password;
 			$user->save();
 			$user->image()->save($image);
 		}

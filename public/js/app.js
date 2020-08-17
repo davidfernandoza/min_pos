@@ -39631,7 +39631,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-footer" }, [
-        _vm.form_type == "create"
+        _vm.form_type == "created"
           ? _c(
               "button",
               {

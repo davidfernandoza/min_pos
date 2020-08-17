@@ -39,7 +39,7 @@
 		</div>
 
 		<div class="card-footer">
-			<button type="submit" class="btn btn-primary btn-block" v-if="form_type == 'create'">Register</button>
+			<button type="submit" class="btn btn-primary btn-block" v-if="form_type == 'created'">Register</button>
 			<button type="submit" class="btn btn-primary btn-block" v-else>Edit</button>
 		</div>
 
