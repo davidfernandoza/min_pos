@@ -36,6 +36,10 @@
 				productsList: this.products
 			}
 		},
+		mounted(){
+			this.$parent
+			// TODO: SE ACCEDE A LA VARIABLE DEL PADRE Y ESTA SE LE PASA AL MODAL
+		},
 		methods:{
 			openModal(){
 				$('#modal').modal('show');

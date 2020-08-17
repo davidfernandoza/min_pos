@@ -28,15 +28,8 @@ class UserRequest extends FormRequest
 					'names' => 'required|string|min:3|max:100',
 					'last_names' => 'required|string|min:3|max:100',
 					'password' => 'required|string|min:8|max:100|confirmed',
-					'email' => 'required|email|min:6|max:100|unique:users',
+					'email' => 'required|email|min:6|max:100|unique:users,email,'.$this->id,
 					'rol' => 'string|in:ADMIN,USER'
         ];
 		}
-
-		// public function messages()
-		// {
-		// 	return [
-		// 		'photo.image' => '¡El avatar del usuario debe de ser una imagen valida!'
-		// 	];
-		// }
-}
+	}

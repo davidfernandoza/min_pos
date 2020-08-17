@@ -1,8 +1,17 @@
 .sidebar{
 	height: calc(100vh - 55px);
 	border-right: 1px solid rgba(0, 0, 0, 0.125);
+	position: fixed;
 	ul{
 		margin-right: 0px!important;
+		a{
+			color: black;
+			text-decoration: none;
+			text-align: center;
+			&:hover{
+				background-color: rgb(197, 197, 197);
+			}
+		}
 	}
 }
 

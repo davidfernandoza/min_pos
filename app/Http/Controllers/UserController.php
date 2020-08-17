@@ -17,39 +17,49 @@ class UserController extends Controller
 		return view('admin.users-list', ['users' => User::with('image')->get()]);
 	}
 
-	 public function store(UserRequest $request)
-	 {
+	public function store(UserRequest $request, User $user)
+	{
+		//IMG
+		if($request->file('photo')){
+			$path = Storage::disk('public')->put('images', $request->file('photo'));
+		}
+		else $path = config('helpers.photoDefault');
+		$image = new Image();
+		$image->url = "/".$path;
 
-			// Subir IMG
-			$url = config('helpers.photoDefault');
-			if ($request->file('photo')) {
-				$path = Storage::disk('public')->put('images', $request->file('photo'));
-				$url = $path;
+		// Update
+		if ($user->id) {
+			$user->update($request->all());
+			if($request->file('photo')){
+				$user->image()->update($image->toArray());
 			}
-
+		}
+		else{
+			// Create
 			$user = new User($request->all());
-			$image = new Image();
-			$image->url = $url;
-
 			$user->save();
 			$user->image()->save($image);
+		}
 
-			if ($request->ajax()) {
-				return response()->json([
-					'status' => 200,
-					'user' => $user
+		// Response
+		if ($request->ajax()) {
+			return response()->json([
+				'status' => 200,
+				'users' => $user::with('image')->get()
 				]);
 			}
 			Auth::login($user);
 			return redirect('/');
-	 }
-
-	public function delete(User $user)
-	{
-		if(Auth::user() != $user){
-			$user->delete();
-			return response()->json(['deleted' => 'Ok']);
 		}
-		return response()->json(['deleted' => 'Forbidden'], 403);
+
+
+
+		public function delete(User $user)
+		{
+			if(Auth::user() != $user){
+				$user->delete();
+				return response()->json(['deleted' => 'Ok']);
+			}
+			return response()->json(['deleted' => 'Forbidden'], 403);
+		}
 	}
-}

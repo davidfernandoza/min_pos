@@ -11,13 +11,17 @@ import CategoryList from './components/category/CategoryListComponent.vue'
 import CategoryInfo from './components/category/CategoryInfoComponent.vue'
 import ProductInfo from './components/product/ProductInfoComponent.vue'
 import ProductSearch from './components/product/ProductSearchComponent.vue'
-import AdminBody from './components/admin/AdminBodyComponent.vue'
+import ProductListAdmin from './components/admin/product/ProductListComponent'
+import CategoryListAdmin from './components/admin/category/CategoryListComponent.vue'
+import UserListAdmin from './components/admin/user/UserListComponent.vue'
 import Dashboard from './components/admin/DashboardComponent.vue'
 
 new Vue({
 	el: '#app',
 	components:{
-		AdminBody,
+		ProductListAdmin,
+		CategoryListAdmin,
+		UserListAdmin,
 		CategoryList,
 		CategoryInfo,
 		Dashboard,

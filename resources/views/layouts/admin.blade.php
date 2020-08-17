@@ -87,10 +87,10 @@
 
 	<main class="overflow-hidden container-main">
 		<div class="row">
-			<div class="col-md-3 sidebar" >
+			<div class="col-md-3"></div>
+			<div class=" col-md-3 sidebar" >
 				<ul class="list-group list-group-flush ul-container">
-					<a href="{{route('dashboard')}}" class="list-group-item">Dashboard
-					</a>
+					<a href="{{route('dashboard')}}" class="list-group-item">Dashboard</a>
 					<a href="{{route('categories')}}" class="list-group-item">Categories</a>
 					<a href="{{route('products')}}" class="list-group-item">Products</a>
 					<a href="{{route('users')}}" class="list-group-item">Users</a>

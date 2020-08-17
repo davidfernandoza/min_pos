@@ -11,7 +11,7 @@
 		<div class="card mb-3" v-for="(comment, index) in comments" :key="index">
 			<div class="row no-gutters ">
 				<div class="col-4 col-md-3 col-lg-2 d-flex pl-2 flex-wrap align-items-center ">
-					<img :src="`/${comment.user.image.url}`"  width="100">
+					<img :src="`${comment.user.image.url}`"  width="100">
 				</div>
 				<div class="col-8 col-md-9 col-lg-10">
 					<div class="card-body">
@@ -46,9 +46,9 @@
 					this.comments = response.data
 				})
 			},
-			store(){
+			async store(){
 				if (Object.keys(this.auth_id).length === 0) {
-					alert('Login first!!')
+					await swal("Login first!!", "", "warning");
 					window.location.href = "/auth/login";
 				}
 				else{
