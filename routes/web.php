@@ -34,14 +34,14 @@ Route::group(['middleware'=>'auth'], function(){
 		// Product
 		Route::group(['prefix' => 'products'], function(){
 			Route::get('/', 'ProductController@getAll')->name('products');
-			Route::post('/store', 'ProductController@store');
+			Route::post('/store/{product?}', 'ProductController@store');
 			Route::post('/delete/{product}', 'ProductController@delete');
 		});
 
 		// Category
 		Route::group(['prefix' => 'categories'], function(){
 			Route::get('/', 'CategoryController@getAll')->name('categories');
-			Route::post('/store', 'CategoryController@store');
+			Route::post('/store/{category?}', 'CategoryController@store');
 			Route::post('/delete/{category}', 'CategoryController@delete');
 		});
 

@@ -14,23 +14,23 @@
 		</div>
 
 		<div class="form-group">
-			<input type="text" :class="`form-control ${errors.names? 'is-invalid': ''}`" name="names" placeholder="Names" v-model="user.names" required>
+			<input type="text" :class="`form-control ${errors.names? 'is-invalid': ''}`" name="names" placeholder="Names" v-model="user.names" required title="Names">
 			<small v-if="errors.names" class="invalid-feedback">{{errors.names[0]}}</small>
 		</div>
 
 		<div class="form-group">
-			<input type="text" :class="`form-control ${errors.last_names? 'is-invalid': ''}`" name="last_names" placeholder="Last Names" v-model="user.last_names" required>
+			<input type="text" :class="`form-control ${errors.last_names? 'is-invalid': ''}`" name="last_names" placeholder="Last Names" v-model="user.last_names" required title="Last Names">
 			<small v-if="errors.last_names" class="invalid-feedback">{{errors.last_names[0]}}</small>
 		</div>
 
 		<div class="form-group">
-			<input type="email" :class="`form-control ${errors.email? 'is-invalid': ''}`" name="email" placeholder="Email" v-model="user.email" required>
+			<input type="email" :class="`form-control ${errors.email? 'is-invalid': ''}`" name="email" placeholder="Email" v-model="user.email" required title="Email">
 			<small v-if="errors.email" class="invalid-feedback">{{errors.email[0]}}</small>
 		</div>
 
 
 		<div class="form-group">
-			<select :class="`form-control ${errors.rol? 'is-invalid': ''}`" name="rol" v-model="user.rol" required>
+			<select :class="`form-control ${errors.rol? 'is-invalid': ''}`" name="rol" v-model="user.rol" required title="Rol">
 				<option disabled>Select Rol</option>
 				<option>ADMIN</option>
 				<option>USER</option>
@@ -67,7 +67,7 @@
 			}
 		},
 		created(){
-			this.user = this.default
+			this.user = {...this.default}
 		},
 		mounted(){
 			$(document).on('hidden.bs.modal', () => {

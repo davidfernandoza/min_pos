@@ -52,16 +52,14 @@ class UserController extends Controller
 			}
 			Auth::login($user);
 			return redirect('/');
-		}
-
-
-
-		public function delete(User $user)
-		{
-			if(Auth::user() != $user){
-				$user->delete();
-				return response()->json(['deleted' => 'Ok']);
-			}
-			return response()->json(['deleted' => 'Forbidden'], 403);
-		}
 	}
+
+	public function delete(User $user)
+	{
+		if(Auth::user() != $user){
+			$user->delete();
+			return response()->json(['deleted' => 'Ok']);
+		}
+		return response()->json(['deleted' => 'Forbidden'], 403);
+	}
+}

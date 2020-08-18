@@ -59,8 +59,7 @@
 			return {
 				users_list: null,
 				user_data: null,
-				title: '',
-				backup: {}
+				title: ''
 			}
 		},
 		created(){

@@ -2,7 +2,7 @@
 	<div class="container m-auto">
 		<div class="row">
 			<div class="col-md-8 my-4">
-				<img :src="product.image.url"/>
+				<img :src="product.image.url" width="700"/>
 			</div>
 			<div class="col-md-4 my-4">
 				<h1 class="h2">

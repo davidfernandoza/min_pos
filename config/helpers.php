@@ -2,5 +2,6 @@
 
 
 return [
-	'photoDefault' => 'images/default.png'
+	'photoDefault' => 'images/default.png',
+	'photoProductDefault' => 'images/products/default.png'
 ];
