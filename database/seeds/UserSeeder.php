@@ -19,7 +19,6 @@ class UserSeeder extends Seeder
 				'last_names' => 'Torres Zapata',
 				'email' => 'fernando.zapata.live@gmail.com',
 				'password' =>  bcrypt('123456789'),
-				'rol' => 'ADMIN',
 				'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
 				'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
 			]);

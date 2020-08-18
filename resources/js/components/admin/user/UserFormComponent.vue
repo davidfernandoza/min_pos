@@ -30,10 +30,9 @@
 
 
 		<div class="form-group">
-			<select :class="`form-control ${errors.rol? 'is-invalid': ''}`" name="rol" v-model="user.rol" required title="Rol">
-				<option disabled>Select Rol</option>
-				<option>ADMIN</option>
-				<option>USER</option>
+			<select :class="`form-control ${errors.rol? 'is-invalid': ''}`" name="rol" v-model="user.roles[0].name" required title="Role">
+				<option disabled>Select Role</option>
+				<option :value="role.name" v-for="(role, index2) in roles" :key="index2">{{role.name}}</option>
 			</select>
 			<small v-if="errors.rol" class="invalid-feedback">{{errors.rol[0]}}</small>
 		</div>
@@ -53,7 +52,9 @@
 			return{
 				default:{
 					id: '',
-					rol: 'Select Rol',
+					roles: [{
+						name: 'Select Role'
+					}],
 					password: '123456789',
 					image:{
 						url: ''
@@ -63,11 +64,13 @@
 				server_url: '/admin/users/store/',
 				form_type: 'created',
 				show_image: false,
+				roles: [],
 				errors: {}
 			}
 		},
 		created(){
 			this.user = {...this.default}
+			this.getRoles()
 		},
 		mounted(){
 			$(document).on('hidden.bs.modal', () => {
@@ -105,7 +108,7 @@
 				data_user.append('names', this.user.names)
 				data_user.append('last_names', this.user.last_names)
 				data_user.append('email', this.user.email)
-				data_user.append('rol', this.user.rol)
+				data_user.append('rol', this.user.roles[0].name)
 				data_user.append('password', this.user.password)
 				data_user.append('password_confirmation', this.user.password)
 
@@ -120,11 +123,14 @@
 					$('#modal').modal('hide')
 
 				}).catch(error =>{
-					console.log();
 					this.errors = error.response.data.errors
 				})
+			},
 
-
+			getRoles(){
+				axios.get('/roles/').then(response => {
+					this.roles = response.data.roles
+				})
 			}
 		}
 	}

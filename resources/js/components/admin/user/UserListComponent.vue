@@ -15,7 +15,7 @@
 						<th>Names</th>
 						<th>Last Names</th>
 						<th>Email</th>
-						<th>Rol</th>
+						<th>Roles</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -25,7 +25,7 @@
 						<td>{{user.names}}</td>
 						<td>{{user.last_names}}</td>
 						<td>{{user.email}}</td>
-						<td>{{user.rol}}</td>
+						<td><samp v-for="(role, index2) in user.roles" :key="index2">{{role.name}}</samp></td>
 						<td>
 							<button v-on:click="userEdit(index)" data-toggle="modal" class="btn btn-sm btn-warning">
 								<i class="fas fa-edit"></i>

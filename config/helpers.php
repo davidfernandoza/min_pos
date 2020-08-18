@@ -2,6 +2,7 @@
 
 
 return [
-	'photoDefault' => 'images/default.png',
-	'photoProductDefault' => 'images/products/default.png'
+	'photoUserDefault' => 'images/default.png',
+	'photoProductDefault' => 'images/products/default.png',
+	'roleDefault' => 'USER'
 ];

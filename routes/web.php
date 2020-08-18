@@ -22,12 +22,13 @@ Route::group(['prefix' => 'categories'], function () {
 
 
 // Auth
-Route::group(['middleware'=>'auth'], function(){
+Route::group(['middleware'=>'auth.basic'], function(){
 	Route::post('/auth/logout', 'AuthController@logout')->name('logout');
 	Route::post('/comments/store/{user}', 'CommentController@store');
 
 	// Admin
-	Route::group(['prefix' => 'admin'], function(){
+	Route::group(['prefix' => 'admin', 'middleware'=>'role:ADMIN|SELLER'], function(){
+		Route::get('/roles/', 'RoleController@getAll');
 		Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
 		Route::get('/categories', 'CategoryController@getAll')->name('categories');
 
@@ -46,7 +47,7 @@ Route::group(['middleware'=>'auth'], function(){
 		});
 
 		// User
-		Route::group(['prefix' => 'users'], function(){
+		Route::group(['prefix' => 'users', 'middleware'=>'role:ADMIN'], function(){
 			Route::get('/', 'UserController@getAll')->name('users');
 			Route::post('/store/{user?}', 'UserController@store');
 			Route::post('/delete/{user}', 'UserController@delete');

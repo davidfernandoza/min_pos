@@ -15,13 +15,17 @@ class DatabaseSeeder extends Seeder
 			'images',
 			'products',
 			'categories',
-			'users'
+			'users',
+			'roles',
+			'model_has_roles'
 			]);
 
 		$this->call('CategorySeeder');
 		$this->call('ProductSeeder');
 		$this->call('UserSeeder');
 		$this->call('ImageSeeder');
+		$this->call('RoleSeeder');
+		$this->call('ModelHasRoleSeeder');
 	}
 
 	protected function truncateTables(array $tables){

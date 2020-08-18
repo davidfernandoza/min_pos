@@ -2601,14 +2601,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user_data'],
   data: function data() {
     return {
       "default": {
         id: '',
-        rol: 'Select Rol',
+        roles: [{
+          name: 'Select Role'
+        }],
         password: '123456789',
         image: {
           url: ''
@@ -2618,11 +2619,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       server_url: '/admin/users/store/',
       form_type: 'created',
       show_image: false,
+      roles: [],
       errors: {}
     };
   },
   created: function created() {
     this.user = _objectSpread({}, this["default"]);
+    this.getRoles();
   },
   mounted: function mounted() {
     var _this = this;
@@ -2666,7 +2669,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 data_user.append('names', _this2.user.names);
                 data_user.append('last_names', _this2.user.last_names);
                 data_user.append('email', _this2.user.email);
-                data_user.append('rol', _this2.user.rol);
+                data_user.append('rol', _this2.user.roles[0].name);
                 data_user.append('password', _this2.user.password);
                 data_user.append('password_confirmation', _this2.user.password);
 
@@ -2681,7 +2684,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   swal("User ".concat(_this2.form_type, " successful"), "", "success");
                   $('#modal').modal('hide');
                 })["catch"](function (error) {
-                  console.log();
                   _this2.errors = error.response.data.errors;
                 });
 
@@ -2695,6 +2697,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         }, _callee);
       }))();
+    },
+    getRoles: function getRoles() {
+      var _this3 = this;
+
+      axios.get('/roles/').then(function (response) {
+        _this3.roles = response.data.roles;
+      });
     }
   }
 });
@@ -40453,12 +40462,12 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.user.rol,
-                expression: "user.rol"
+                value: _vm.user.roles[0].name,
+                expression: "user.roles[0].name"
               }
             ],
             class: "form-control " + (_vm.errors.rol ? "is-invalid" : ""),
-            attrs: { name: "rol", required: "", title: "Rol" },
+            attrs: { name: "rol", required: "", title: "Role" },
             on: {
               change: function($event) {
                 var $$selectedVal = Array.prototype.filter
@@ -40470,20 +40479,25 @@ var render = function() {
                     return val
                   })
                 _vm.$set(
-                  _vm.user,
-                  "rol",
+                  _vm.user.roles[0],
+                  "name",
                   $event.target.multiple ? $$selectedVal : $$selectedVal[0]
                 )
               }
             }
           },
           [
-            _c("option", { attrs: { disabled: "" } }, [_vm._v("Select Rol")]),
+            _c("option", { attrs: { disabled: "" } }, [_vm._v("Select Role")]),
             _vm._v(" "),
-            _c("option", [_vm._v("ADMIN")]),
-            _vm._v(" "),
-            _c("option", [_vm._v("USER")])
-          ]
+            _vm._l(_vm.roles, function(role, index2) {
+              return _c(
+                "option",
+                { key: index2, domProps: { value: role.name } },
+                [_vm._v(_vm._s(role.name))]
+              )
+            })
+          ],
+          2
         ),
         _vm._v(" "),
         _vm.errors.rol
@@ -40581,7 +40595,15 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(user.email))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(user.rol))]),
+                _c(
+                  "td",
+                  _vm._l(user.roles, function(role, index2) {
+                    return _c("samp", { key: index2 }, [
+                      _vm._v(_vm._s(role.name))
+                    ])
+                  }),
+                  0
+                ),
                 _vm._v(" "),
                 _c("td", [
                   _c(
@@ -40652,7 +40674,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Email")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Rol")]),
+        _c("th", [_vm._v("Roles")]),
         _vm._v(" "),
         _c("th", [_vm._v("Actions")])
       ])

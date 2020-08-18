@@ -29,7 +29,7 @@ class UserRequest extends FormRequest
 					'last_names' => 'required|string|min:3|max:100',
 					'password' => 'required|string|min:8|max:100|confirmed',
 					'email' => 'required|email|min:6|max:100|unique:users,email,'.$this->id,
-					'rol' => 'string|in:ADMIN,USER'
+					'rol' => 'string|exists:roles,name'
         ];
 		}
 	}

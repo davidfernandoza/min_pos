@@ -73,11 +73,11 @@
 							</a>
 
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-								@if (Auth::user()->rol == 'ADMIN')
+								@hasanyrole('ADMIN|SELLER')
 								<a class="dropdown-item" href="{{route('dashboard')}}">
 									Dashboard
 									</a>
-								@endif
+								@endrole
 
 								<a class="dropdown-item" href="{{ route('logout') }}"
 								onclick="event.preventDefault();
