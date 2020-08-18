@@ -75,11 +75,13 @@
 				this.product_data = null
 				$('#modal').modal('show')
 			},
+
 			productEdit(index){
 				this.title = 'Product Edit'
 				this.product_data  = this.products_list[index]
 				$('#modal').modal('show');
 			},
+
 			async deleteProduct(index){
 				const deleted = await swal({
 					title: "Are you sure to delete this record??",

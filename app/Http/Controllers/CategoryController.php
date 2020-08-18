@@ -30,39 +30,22 @@ class CategoryController extends Controller
 
 	public function store(CategoryRequest $request, Category $category)
 	{
-		//Img
-		if($request->file('photo')){
-			$path = Storage::disk('public')->put('images', $request->file('photo'));
-		}
-		else $path = config('helpers.photoDefault');
-		$image = new Image();
-		$image->url = "/".$path;
 
 		// Update
-		if ($user->id) {
-			$user->update($request->all());
-			if($request->file('photo')){
-				$user->image()->update($image->toArray());
-			}
+		if ( $category->id) {
+			 $category->update($request->all());
 		}
-
 		// Create
 		else{
-			$user = new User($request->all());
-			$user->password = $request->password;
-			$user->save();
-			$user->image()->save($image);
+			 $category = new Category($request->all());
+			 $category->save();
 		}
 
-		// Response
-		if ($request->ajax()) {
-			return response()->json([
-				'status' => 200,
-				'users' => $user::with('image')->get()
-				]);
-			}
-			Auth::login($user);
-			return redirect('/');
+		return response()->json([
+			'status' => 200,
+			'categories' => $category::get()
+		]);
+
 	}
 
 	public function delete(Category $category)
