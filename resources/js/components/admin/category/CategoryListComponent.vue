@@ -1,39 +1,25 @@
 <template>
 	<div>
-		<div class="row mt-3">
+		<div class="row my-3">
 			<div class="col-12 d-flex justify-content-end">
 				<button type="button" class="btn btn-primary" data-toggle="modal" v-on:click="newCategory">
 					<i class="fas fa-plus"></i> New Category
 				</button>
 			</div>
 		</div>
-		<div class="row m-3">
-			<table class="table table-sm">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="(category, index) in categories_list" :key="index">
-						<td>{{category.name}}</td>
-						<td class="d-flex justify-content-center">
-							<button v-on:click="categoryEdit(index)" data-toggle="modal" class="btn btn-sm btn-warning">
-								<i class="fas fa-edit"></i>
-							</button>
-							<button v-on:click="deleteProduct(index)" class="btn btn-sm btn-danger">
-								<i class="fas fa-trash-alt"></i>
-							</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+
+		<table id="categories_table" class="display table table-sm" style="width:100%" @click="getEventTable">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+		</table>
 
 		<!-- Modal -->
 		<modal-category :title="title">
-			<category-form :category_data="category_data" @category="categories_list = $event"/>
+			<category-form :category_data="category_data" @refreshTable="refreshTable()"/>
 		</modal-category>
 	</div>
 </template>
@@ -42,7 +28,6 @@
 	import CategoryForm from './CategoryFormComponent.vue'
 	import ModalCategory from '../ModalComponent.vue'
 	export default {
-		props:['categories'],
 		components:{
 			CategoryForm,
 			ModalCategory
@@ -50,26 +35,60 @@
 		data(){
 			return {
 				category_data: {name: ''},
-				categories_list: '',
 				title: ''
 			}
 		},
-		created(){
-			this.categories_list = this.categories
+		mounted(){
+			this.getCategories()
 		},
 		methods:{
+
+			getCategories(){
+				$('#categories_table').DataTable( {
+					'processing': true,
+					'serverSide': true,
+					'ajax': "/admin/categories/data-table",
+					columns:[
+						{data: 'name', name: 'name'},
+						{data: 'actions', name: 'actions', orderable: false, searchable: false},
+					]
+    		})
+			},
+
+			getEventTable(event){
+				const button = event.target
+				if (button.getAttribute('role') === 'delete') {
+					this.deleteProduct(button.getAttribute('data-id'))
+				}
+				else {
+					this.categoryEdit(button.getAttribute('data-id'))
+				}
+			},
+
 			// Actions buttons
 			newCategory(){
 				this.title = 'New Category'
 				this.category_data = null
 				$('#modal').modal('show')
 			},
-			categoryEdit(index){
+
+			async categoryEdit(id){
+				this.category_data = await this.getCategory(id)
 				this.title = 'Category Edit'
-				this.category_data  = this.categories_list[index]
 				$('#modal').modal('show');
 			},
-			async deleteProduct(index){
+
+
+			refreshTable(){
+				$('#categories_table').DataTable().ajax.reload(null, false)
+			},
+
+			async getCategory(id){
+				const response = await axios.get(`/admin/categories/get/${id}`)
+				return response.data
+			},
+
+			async deleteProduct(id){
 				const deleted = await swal({
 					title: "Are you sure to delete this record??",
 					icon: "warning",
@@ -78,8 +97,8 @@
 				})
 
 				if (deleted) {
-					axios.post(`categories/delete/${this.categories[index].id}`).then(response => {
-						this.categories_list.splice(index, 1)
+					axios.post(`/admin/categories/delete/${id}`).then(response => {
+						this.refreshTable()
 						swal("Category deleted", "", "success");
 					})
 				}

@@ -77,6 +77,7 @@
 				this.$refs.photo.value = null
 				this.user = {...this.default}
 				this.show_image = false
+				this.errors = {}
 			})
 
 		},
@@ -128,7 +129,7 @@
 			},
 
 			getRoles(){
-				axios.get('/roles/').then(response => {
+				axios.get('/admin/roles/').then(response => {
 					this.roles = response.data.roles
 				})
 			}

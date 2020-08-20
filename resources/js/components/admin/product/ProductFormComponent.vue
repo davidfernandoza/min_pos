@@ -84,6 +84,7 @@
 				this.$refs.photo.value = null
 				this.product = {...this.default}
 				this.show_image = false
+				this.errors = {}
 			})
 		},
 		watch: {
@@ -132,7 +133,7 @@
 			},
 
 			getCategories(){
-				axios.get('/categories/').then(response => {
+				axios.get('/admin/categories/').then(response => {
 					this.categories = response.data
 				})
 			}

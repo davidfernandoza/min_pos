@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 
 @section('content')
-	<category-list-admin :categories="{{$categories}}"/>
+	<category-list-admin/>
 @endsection

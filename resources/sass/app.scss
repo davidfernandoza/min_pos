@@ -6,10 +6,13 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import '~datatables.net-bs4/css/dataTables.bootstrap4.min.css';
 
 @import './login';
 @import  './category';
 @import './sidebar';
+
+
 
 
 

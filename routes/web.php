@@ -41,7 +41,9 @@ Route::group(['middleware'=>'auth.basic'], function(){
 
 		// Category
 		Route::group(['prefix' => 'categories'], function(){
-			Route::get('/', 'CategoryController@getAll')->name('categories');
+			Route::view('/', 'admin.categories-list')->name('categories');
+			Route::get('/get/{category}', 'CategoryController@get');
+			Route::get('/data-table', 'CategoryController@getAll');
 			Route::post('/store/{category?}', 'CategoryController@store');
 			Route::post('/delete/{category}', 'CategoryController@delete');
 		});

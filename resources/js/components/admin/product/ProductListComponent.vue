@@ -1,45 +1,44 @@
 <template>
 	<div>
-		<div class="row mt-3">
+		<div class="row my-3">
 			<div class="col-12 d-flex justify-content-end">
 				<button type="button" class="btn btn-primary" data-toggle="modal" v-on:click="newProduct">
 					<i class="fas fa-plus"></i> New Product
 				</button>
 			</div>
 		</div>
-		<div class="row m-3">
-			<table class="table table-sm">
-				<thead>
-					<tr>
-						<th>Image</th>
-						<th>Name</th>
-						<th>Category</th>
-						<th>Price</th>
-						<th>Stock</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="(product, index) in products_list" :key="index">
-						<td><img :src="product.image.url" width="80"></td>
-						<td>{{product.name}}</td>
-						<td>{{product.category.name}}</td>
-						<td>{{product.price}}</td>
-						<td>{{product.amount}}</td>
-						<td>
-							<button v-on:click="productEdit(index)" data-toggle="modal" class="btn btn-sm btn-warning">
-								<i class="fas fa-edit"></i>
-							</button>
-							<button v-on:click="deleteProduct(index)" class="btn btn-sm btn-danger">
-								<i class="fas fa-trash-alt"></i>
-							</button>
-							<a :href="`/products/${product.id}`" class="btn btn-info btn-sm" target="_blank"><i class="far fa-eye"></i></a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+		<table id="table" class="table table-bordered table-hover table-sm" style="width:100%">
+			<thead>
+				<tr>
+					<th>Image</th>
+					<th>Name</th>
+					<th>Category</th>
+					<th>Price</th>
+					<th>Stock</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="(product, index) in products_list" :key="index">
+					<td class="d-flex justify-content-center"><img :src="product.image.url" width="80"></td>
+					<td>{{product.name}}</td>
+					<td>{{product.category.name}}</td>
+					<td>{{product.price}}</td>
+					<td>{{product.amount}}</td>
+					<td>
+						<button v-on:click="productEdit(index)" data-toggle="modal" class="btn btn-sm btn-warning">
+							<i class="fas fa-edit"></i>
+						</button>
+						<button v-on:click="deleteProduct(index)" class="btn btn-sm btn-danger">
+							<i class="fas fa-trash-alt"></i>
+						</button>
+						<a :href="`/products/${product.id}`" class="btn btn-info btn-sm" target="_blank"><i class="far fa-eye"></i></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 
-		</div>
+
 		<!-- Modal -->
 		<modal-product :title="title">
 			<product-form :product_data="product_data" @product="products_list = $event"/>
@@ -81,6 +80,8 @@
 				this.product_data  = this.products_list[index]
 				$('#modal').modal('show');
 			},
+
+
 
 			async deleteProduct(index){
 				const deleted = await swal({

@@ -6,6 +6,7 @@
 require('./bootstrap')
 
 import swal from 'sweetalert'
+import datatables from 'datatables.net-bs4'
 import Vue from 'vue'
 import CategoryList from './components/category/CategoryListComponent.vue'
 import CategoryInfo from './components/category/CategoryInfoComponent.vue'

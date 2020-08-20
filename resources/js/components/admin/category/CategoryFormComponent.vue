@@ -35,6 +35,7 @@
 		mounted(){
 			$(document).on('hidden.bs.modal', () => {
 				this.category = {...this.default}
+				this.errors = {}
 			})
 		},
 		watch: {
@@ -56,9 +57,10 @@
 				: this.server_url
 
 				const response = await axios.post(url, this.category).then(response => {
-					this.$emit("category", response.data.categories);
+					this.$emit('refreshTable');
 					swal(`Product ${this.form_type} successful`, "", "success");
 					$('#modal').modal('hide')
+
 				}).catch(error =>{
 					this.errors = error.response.data.errors
 				})

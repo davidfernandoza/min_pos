@@ -1,43 +1,43 @@
 <template>
 	<div>
-		<div class="row mt-3">
+		<div class="row my-3">
 			<div class="col-12 d-flex justify-content-end">
 				<button type="button" class="btn btn-primary" data-toggle="modal" v-on:click="newUser">
 					<i class="fas fa-plus"></i> New User
 				</button>
 			</div>
 		</div>
-		<div class="row m-3">
-			<table class="table table-sm">
-				<thead>
-					<tr>
-						<th>Photo</th>
-						<th>Names</th>
-						<th>Last Names</th>
-						<th>Email</th>
-						<th>Roles</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="(user, index) in users_list" :key="index">
-						<td><img :src="`${user.image.url}`" width="50" height="50"></td>
-						<td>{{user.names}}</td>
-						<td>{{user.last_names}}</td>
-						<td>{{user.email}}</td>
-						<td><samp v-for="(role, index2) in user.roles" :key="index2">{{role.name}}</samp></td>
-						<td>
-							<button v-on:click="userEdit(index)" data-toggle="modal" class="btn btn-sm btn-warning">
-								<i class="fas fa-edit"></i>
-							</button>
-							<button v-on:click="deleteProduct(index)" class="btn btn-sm btn-danger">
-								<i class="fas fa-trash-alt"></i>
-							</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+
+		<table id="table" class="display table table-sm" style="width:100%" >
+			<thead>
+				<tr>
+					<th>Photo</th>
+					<th>Names</th>
+					<th>Last Names</th>
+					<th>Email</th>
+					<th>Roles</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="(user, index) in users_list" :key="index">
+					<td><img :src="`${user.image.url}`" width="50" height="50"></td>
+					<td>{{user.names}}</td>
+					<td>{{user.last_names}}</td>
+					<td>{{user.email}}</td>
+					<td><samp v-for="(role, index2) in user.roles" :key="index2">{{role.name}}</samp></td>
+					<td>
+						<button v-on:click="userEdit(index)" data-toggle="modal" class="btn btn-sm btn-warning">
+							<i class="fas fa-edit"></i>
+						</button>
+						<button v-on:click="deleteProduct(index)" class="btn btn-sm btn-danger">
+							<i class="fas fa-trash-alt"></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
 
 		<!-- Modal -->
 		<modal-user :title="title">
